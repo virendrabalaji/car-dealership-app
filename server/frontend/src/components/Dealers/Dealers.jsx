@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
+import { Link } from "react-router-dom";
 
 const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
@@ -7,6 +8,7 @@ const Dealers = () => {
   const [stateFilter, setStateFilter] = useState("");
 
   useEffect(() => {
+    // Demo data (no backend dependency)
     setDealersList([
       { id: 1, full_name: "Demo Motors", city: "Dallas", state: "TX" },
       { id: 2, full_name: "Auto Hub", city: "Austin", state: "TX" },
@@ -16,6 +18,7 @@ const Dealers = () => {
     ]);
   }, []);
 
+  // Filter logic
   const filteredDealers = dealersList.filter((dealer) => {
     return (
       dealer.full_name.toLowerCase().includes(search.toLowerCase()) &&
@@ -27,13 +30,21 @@ const Dealers = () => {
     <div>
       <Header />
 
+      {/* Title */}
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <h1>🚗 Car Dealership Platform</h1>
         <p>Find dealers near you</p>
       </div>
 
       {/* Filters */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "10px",
+          margin: "20px",
+        }}
+      >
         <input
           type="text"
           placeholder="Search dealer..."
@@ -42,7 +53,10 @@ const Dealers = () => {
           style={{ padding: "10px", width: "200px" }}
         />
 
-        <select onChange={(e) => setStateFilter(e.target.value)} style={{ padding: "10px" }}>
+        <select
+          onChange={(e) => setStateFilter(e.target.value)}
+          style={{ padding: "10px" }}
+        >
           <option value="">All States</option>
           <option value="TX">Texas</option>
           <option value="CA">California</option>
@@ -50,8 +64,15 @@ const Dealers = () => {
         </select>
       </div>
 
-      {/* Cards */}
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
+      {/* Dealer Cards */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
         {filteredDealers.map((dealer) => (
           <div
             key={dealer.id}
@@ -60,17 +81,19 @@ const Dealers = () => {
               borderRadius: "10px",
               padding: "15px",
               width: "250px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
             }}
           >
             <h3>{dealer.full_name}</h3>
             <p>📍 {dealer.city}</p>
             <p>State: {dealer.state}</p>
-            <a href={`/dealer/${dealer.id}`}>
-  <button style={{ padding: "8px 12px", marginTop: "10px" }}>
-    View Details
-  </button>
-</a>
+
+            {/* Navigation FIX */}
+            <Link to={`/dealer/${dealer.id}`}>
+              <button style={{ padding: "8px 12px", marginTop: "10px" }}>
+                View Details
+              </button>
+            </Link>
           </div>
         ))}
       </div>
