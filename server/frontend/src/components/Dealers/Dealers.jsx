@@ -79,7 +79,7 @@ return(
          ):<></>
       }
       </tr>
-     {dealersList.map(dealer => (
+     {Array.isArray(dealersList) && dealersList.map(dealer => (
         <tr>
           <td>{dealer['id']}</td>
           <td><a href={'/dealer/'+dealer['id']}>{dealer['full_name']}</a></td>
