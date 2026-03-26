@@ -1,39 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import "./Dealers.css";
-import "../assets/style.css";
-import Header from '../Header/Header';
+import React, { useState, useEffect } from "react";
+import Header from "../Header/Header";
 
 const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
+  const [search, setSearch] = useState("");
+  const [stateFilter, setStateFilter] = useState("");
 
   useEffect(() => {
     setDealersList([
-      {
-        id: 1,
-        full_name: "Demo Motors",
-        city: "Dallas",
-        address: "Main St",
-        zip: "75001",
-        state: "TX"
-      },
-      {
-        id: 2,
-        full_name: "Auto Hub",
-        city: "Austin",
-        address: "2nd St",
-        zip: "73301",
-        state: "TX"
-      },
-      {
-        id: 3,
-        full_name: "Premium Cars",
-        city: "Houston",
-        address: "Market St",
-        zip: "77001",
-        state: "TX"
-      }
+      { id: 1, full_name: "Demo Motors", city: "Dallas", state: "TX" },
+      { id: 2, full_name: "Auto Hub", city: "Austin", state: "TX" },
+      { id: 3, full_name: "Premium Cars", city: "Houston", state: "TX" },
+      { id: 4, full_name: "Elite Autos", city: "San Jose", state: "CA" },
+      { id: 5, full_name: "Speed Wheels", city: "Miami", state: "FL" }
     ]);
   }, []);
+
+  const filteredDealers = dealersList.filter((dealer) => {
+    return (
+      dealer.full_name.toLowerCase().includes(search.toLowerCase()) &&
+      (stateFilter === "" || dealer.state === stateFilter)
+    );
+  });
 
   return (
     <div>
@@ -41,35 +29,48 @@ const Dealers = () => {
 
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <h1>🚗 Car Dealership Platform</h1>
-        <p>Browse available dealers and explore car services</p>
+        <p>Find dealers near you</p>
       </div>
 
-      <div style={{ padding: "20px" }}>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Dealer Name</th>
-              <th>City</th>
-              <th>Address</th>
-              <th>Zip</th>
-              <th>State</th>
-            </tr>
-          </thead>
+      {/* Filters */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "20px" }}>
+        <input
+          type="text"
+          placeholder="Search dealer..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ padding: "10px", width: "200px" }}
+        />
 
-          <tbody>
-            {dealersList.map((dealer) => (
-              <tr key={dealer.id}>
-                <td>{dealer.id}</td>
-                <td style={{ fontWeight: "bold" }}>{dealer.full_name}</td>
-                <td>{dealer.city}</td>
-                <td>{dealer.address}</td>
-                <td>{dealer.zip}</td>
-                <td>{dealer.state}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <select onChange={(e) => setStateFilter(e.target.value)} style={{ padding: "10px" }}>
+          <option value="">All States</option>
+          <option value="TX">Texas</option>
+          <option value="CA">California</option>
+          <option value="FL">Florida</option>
+        </select>
+      </div>
+
+      {/* Cards */}
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
+        {filteredDealers.map((dealer) => (
+          <div
+            key={dealer.id}
+            style={{
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+              padding: "15px",
+              width: "250px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+            }}
+          >
+            <h3>{dealer.full_name}</h3>
+            <p>📍 {dealer.city}</p>
+            <p>State: {dealer.state}</p>
+            <button style={{ padding: "8px 12px", marginTop: "10px" }}>
+              View Details
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
