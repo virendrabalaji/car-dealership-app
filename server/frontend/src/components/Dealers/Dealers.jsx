@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
 
 const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
@@ -89,11 +88,9 @@ const Dealers = () => {
             <p>State: {dealer.state}</p>
 
             {/* Navigation FIX */}
-            <Link to={`/dealer/${dealer.id}`}>
-              <button style={{ padding: "8px 12px", marginTop: "10px" }}>
-                View Details
-              </button>
-            </Link>
+            <button style={{ padding: "8px 12px", marginTop: "10px" }}>
+  View Details
+</button>
           </div>
         ))}
       </div>
