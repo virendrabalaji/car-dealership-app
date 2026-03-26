@@ -1,7 +1,8 @@
 {
-  "build": {
-    "env": {
-      "CI": "false"
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
-  }
+  ]
 }
