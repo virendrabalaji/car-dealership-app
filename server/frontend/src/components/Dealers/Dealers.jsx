@@ -7,7 +7,6 @@ const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
 
   useEffect(() => {
-    // Demo data (no backend required)
     setDealersList([
       {
         id: 1,
@@ -24,6 +23,14 @@ const Dealers = () => {
         address: "2nd St",
         zip: "73301",
         state: "TX"
+      },
+      {
+        id: 3,
+        full_name: "Premium Cars",
+        city: "Houston",
+        address: "Market St",
+        zip: "77001",
+        state: "TX"
       }
     ]);
   }, []);
@@ -32,35 +39,38 @@ const Dealers = () => {
     <div>
       <Header />
 
-      <h2 style={{ textAlign: "center", marginTop: "20px" }}>
-        Car Dealership App 🚗
-      </h2>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <h1>🚗 Car Dealership Platform</h1>
+        <p>Browse available dealers and explore car services</p>
+      </div>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Dealer Name</th>
-            <th>City</th>
-            <th>Address</th>
-            <th>Zip</th>
-            <th>State</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {dealersList.map((dealer) => (
-            <tr key={dealer.id}>
-              <td>{dealer.id}</td>
-              <td>{dealer.full_name}</td>
-              <td>{dealer.city}</td>
-              <td>{dealer.address}</td>
-              <td>{dealer.zip}</td>
-              <td>{dealer.state}</td>
+      <div style={{ padding: "20px" }}>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Dealer Name</th>
+              <th>City</th>
+              <th>Address</th>
+              <th>Zip</th>
+              <th>State</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {dealersList.map((dealer) => (
+              <tr key={dealer.id}>
+                <td>{dealer.id}</td>
+                <td style={{ fontWeight: "bold" }}>{dealer.full_name}</td>
+                <td>{dealer.city}</td>
+                <td>{dealer.address}</td>
+                <td>{dealer.zip}</td>
+                <td>{dealer.state}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
