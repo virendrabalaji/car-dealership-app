@@ -45,10 +45,12 @@ const Dealers = () => {
   //useEffect(() => {
   //  get_dealers();
   //},[]);  
-const dealers = [
-  { id: 1, full_name: "Demo Motors", city: "Dallas" },
-  { id: 2, full_name: "Auto Hub", city: "Austin" }
-];
+useEffect(() => {
+  setDealersList([
+    { id: 1, full_name: "Demo Motors", city: "Dallas" },
+    { id: 2, full_name: "Auto Hub", city: "Austin" }
+  ]);
+}, []);
 
 let isLoggedIn = sessionStorage.getItem("username") != null ? true : false;
 return(
