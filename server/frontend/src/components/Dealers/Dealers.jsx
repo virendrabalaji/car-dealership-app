@@ -66,9 +66,11 @@ const Dealers = () => {
             <h3>{dealer.full_name}</h3>
             <p>📍 {dealer.city}</p>
             <p>State: {dealer.state}</p>
-            <button style={{ padding: "8px 12px", marginTop: "10px" }}>
-              View Details
-            </button>
+            <a href={`/dealer/${dealer.id}`}>
+  <button style={{ padding: "8px 12px", marginTop: "10px" }}>
+    View Details
+  </button>
+</a>
           </div>
         ))}
       </div>
